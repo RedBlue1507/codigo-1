@@ -1,0 +1,22 @@
+public class NotasAlumnos {
+    public static void main(String[] args) {
+        // Crear una matriz de 5 filas (alumnos) y 4 columnas (3 notas y 1 promedio)
+        double[][] alumnos = {
+            {8, 7, 9, 0},  // Las tres primeras posiciones son notas, la última es para el promedio
+            {6, 5, 7, 0},
+            {9, 9, 10, 0},
+            {4, 6, 5, 0},
+            {10, 8, 9, 0}
+        };
+        
+        for (int i = 0; i < 5; i++) {
+            double promedio = (alumnos[i][0] + alumnos[i][1] + alumnos[i][2]) / 3.0;
+            alumnos[i][3] = promedio;
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("Alumno %d: Notas = [%.1f, %.1f, %.1f], Promedio = %.2f%n", 
+                              i + 1, alumnos[i][0], alumnos[i][1], alumnos[i][2], alumnos[i][3]);
+        }
+    }
+}
