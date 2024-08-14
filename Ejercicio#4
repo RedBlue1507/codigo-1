@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class ContadorNumeros {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] numeros = new int[10];
+        HashMap<Integer, Integer> contador = new HashMap<>();
+
+        // Ingresar 10 números en el vector
+        System.out.println("Ingresa 10 números:");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Ingresa el número " + (i + 1) + ": ");
+            numeros[i] = scanner.nextInt();
+
+            // Contar las veces que se ingresa cada número
+            if (contador.containsKey(numeros[i])) {
+                contador.put(numeros[i], contador.get(numeros[i]) + 1);
+            } else {
+                contador.put(numeros[i], 1);
+            }
+        }
+
+        // Mostrar cuántas veces se ingresó cada número
+        System.out.println("\nCantidad de veces que se ingresó cada número:");
+        for (Integer numero : contador.keySet()) {
+            System.out.println("El número " + numero + " se ingresó " + contador.get(numero) + " veces.");
+        }
+
+        // Calcular el promedio de los números ingresados
+        double suma = 0;
+        for (int i = 0; i < 10; i++) {
+            suma += numeros[i];
+        }
+        double promedio = suma / 10;
+        System.out.println("\nEl promedio de los números ingresados es: " + promedio);
+    }
+}
