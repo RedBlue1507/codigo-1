@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class ArrayProcessor {
+    private int[] numbers;
+    private int countPositives;
+    private int countNegatives;
+    private int countZeros;
+
+    public void fillArray(int size) {
+        Scanner scanner = new Scanner(System.in);
+        numbers = new int[size];
+        System.out.println("Ingrese " + size + " números enteros:");
+        for (int i = 0; i < size; i++) {
+            System.out.print("Número " + (i + 1) + ": ");
+            numbers[i] = scanner.nextInt();
+        }
+    }
+
+    public void countNumbers() {
+        countPositives = 0;
+        countNegatives = 0;
+        countZeros = 0;
+        for (int num : numbers) {
+            if (num > 0) {
+                countPositives++;
+            } else if (num < 0) {
+                countNegatives++;
+            } else {
+                countZeros++;
+            }
+        }
+    }
+
+    public void displayCounts() {
+        System.out.println("Números positivos: " + countPositives);
+        System.out.println("Números negativos: " + countNegatives);
+        System.out.println("Ceros: " + countZeros);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Ingrese el tamaño del array: ");
+        int size = scanner.nextInt();
+        
+        ArrayProcessor arrayProcessor = new ArrayProcessor();
+      
+        arrayProcessor.fillArray(size);
+      
+        arrayProcessor.countNumbers();
+        
+        arrayProcessor.displayCounts();
+    }
+}
