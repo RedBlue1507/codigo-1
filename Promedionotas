@@ -1,0 +1,62 @@
+public class NotasAlumnos {
+
+    public static void main(String[] args) {
+        // Definir el arreglo de notas
+        double[] notas = {4.5, 3.2, 2.8, 5.0, 3.7, 4.0, 2.5, 3.9, 4.2, 3.1, 4.6, 2.9, 3.8, 4.1, 2.7};
+        
+       
+        double mayorNota = encontrarMayorNota(notas);
+        
+        double porcentajeAprobados = calcularPorcentajeAprobados(notas, 3.0);
+        
+        double promedioNotas = calcularPromedio(notas);
+        
+    
+        int posicionMenorNota = encontrarPosicionMenorNota(notas);
+        
+        System.out.printf("Mayor nota: %.2f%n", mayorNota);
+        System.out.printf("Porcentaje de alumnos que aprobaron con nota superior a 3.0: %.2f%%%n", porcentajeAprobados);
+        System.out.printf("Promedio de las notas: %.2f%n", promedioNotas);
+        System.out.printf("Posición de la menor nota: %d%n", posicionMenorNota);
+    }
+    
+    public static double encontrarMayorNota(double[] notas) {
+        double mayor = notas[0];
+        for (double nota : notas) {
+            if (nota > mayor) {
+                mayor = nota;
+            }
+        }
+        return mayor;
+    }
+    
+    public static double calcularPorcentajeAprobados(double[] notas, double limite) {
+        int contador = 0;
+        for (double nota : notas) {
+            if (nota > limite) {
+                contador++;
+            }
+        }
+        return (contador / (double)notas.length) * 100;
+    }
+    
+    public static double calcularPromedio(double[] notas) {
+        double suma = 0;
+        for (double nota : notas) {
+            suma += nota;
+        }
+        return suma / notas.length;
+    }
+    
+    public static int encontrarPosicionMenorNota(double[] notas) {
+        double menor = notas[0];
+        int posicion = 0;
+        for (int i = 1; i < notas.length; i++) {
+            if (notas[i] < menor) {
+                menor = notas[i];
+                posicion = i;
+            }
+        }
+        return posicion;
+    }
+}
