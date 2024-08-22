@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+public class OPERACIONES {
+
+    // Método para realizar la suma de dos o tres números
+    public double suma(double... numeros) {
+        if (numeros.length < 2) {
+            throw new IllegalArgumentException("Se necesitan al menos dos números para la suma.");
+        }
+        double resultado = 0;
+        for (double num : numeros) {
+            resultado += num;
+        }
+        return resultado;
+    }
+
+    // Método para realizar la resta de dos o tres números
+    public double resta(double... numeros) {
+        if (numeros.length < 2) {
+            throw new IllegalArgumentException("Se necesitan al menos dos números para la resta.");
+        }
+        double resultado = numeros[0];
+        for (int i = 1; i < numeros.length; i++) {
+            resultado -= numeros[i];
+        }
+        return resultado;
+    }
+
+    // Método para realizar la multiplicación de dos o tres números
+    public double multiplicacion(double... numeros) {
+        if (numeros.length < 2) {
+            throw new IllegalArgumentException("Se necesitan al menos dos números para la multiplicación.");
+        }
+        double resultado = 1;
+        for (double num : numeros) {
+            resultado *= num;
+        }
+        return resultado;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        OPERACIONES operaciones = new OPERACIONES();
+
+        while (true) {
+            System.out.println("Elija una operación:");
+            System.out.println("1. Suma");
+            System.out.println("2. Resta");
+            System.out.println("3. Multiplicación");
+            System.out.println("4. Salir");
+
+            System.out.print("Ingrese el número de la operación que desea realizar: ");
+            int eleccion = scanner.nextInt();
+
+            if (eleccion == 4) {
+                System.out.println("Saliendo del programa.");
+                break;
+            }
+
+            System.out.print("¿Cuántos números desea usar? (2 o 3): ");
+            int numCount = scanner.nextInt();
+            if (numCount != 2 && numCount != 3) {
+                System.out.println("Número de valores no válido. Debe ser 2 o 3.");
+                continue;
+            }
+
+            double[] numeros = new double[numCount];
+            for (int i = 0; i < numCount; i++) {
+                System.out.print("Ingrese el número " + (i + 1) + ": ");
+                numeros[i] = scanner.nextDouble();
+            }
+
+            try {
+                switch (eleccion) {
+                    case 1:
+                        System.out.println("Resultado de la suma: " + operaciones.suma(numeros));
+                        break;
+                    case 2:
+                        System.out.println("Resultado de la resta: " + operaciones.resta(numeros));
+                        break;
+                    case 3:
+                        System.out.println("Resultado de la multiplicación: " + operaciones.multiplicacion(numeros));
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        scanner.close();
+    }
+}
