@@ -1,0 +1,36 @@
+public class EstaturasEstudiantes {
+
+    public static void main(String[] args) {
+        double[] estaturas = {
+            1.72, 1.65, 1.80, 1.75, 1.68, 1.82, 1.70, 1.77, 1.79, 1.73,
+            1.71, 1.78, 1.67, 1.80, 1.76, 1.74, 1.69, 1.81, 1.72, 1.83,
+            1.70, 1.76, 1.74, 1.68, 1.77
+        };
+        
+        double estaturaMaxima = encontrarEstaturaMaxima(estaturas);
+        double estaturaMinima = encontrarEstaturaMinima(estaturas);
+    
+        System.out.printf("La estatura más alta de la clase es: %.2f metros%n", estaturaMaxima);
+        System.out.printf("La estatura más baja de la clase es: %.2f metros%n", estaturaMinima);
+    }
+    
+    public static double encontrarEstaturaMaxima(double[] estaturas) {
+        double max = estaturas[0];
+        for (double estatura : estaturas) {
+            if (estatura > max) {
+                max = estatura;
+            }
+        }
+        return max;
+    }
+    
+    public static double encontrarEstaturaMinima(double[] estaturas) {
+        double min = estaturas[0];
+        for (double estatura : estaturas) {
+            if (estatura < min) {
+                min = estatura;
+            }
+        }
+        return min;
+    }
+}
