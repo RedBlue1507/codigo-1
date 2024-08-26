@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class NotasEstudiantes {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Leer la cantidad de estudiantes
+        System.out.print("Ingrese el número de estudiantes: ");
+        int numEstudiantes = scanner.nextInt();
+
+        // Crear un arreglo para almacenar las notas
+        double[] notas = new double[numEstudiantes];
+
+        // Leer las notas de los estudiantes
+        for (int i = 0; i < numEstudiantes; i++) {
+            while (true) {
+                System.out.print("Ingrese la nota del estudiante " + (i + 1) + ": ");
+                double nota = scanner.nextDouble();
+                if (nota >= 0 && nota <= 10) {
+                    notas[i] = nota;
+                    break;
+                } else {
+                    System.out.println("La nota debe estar entre 0 y 10. Inténtelo de nuevo.");
+                }
+            }
+        }
+
+        // Calcular el promedio
+        double suma = 0;
+        for (double nota : notas) {
+            suma += nota;
+        }
+        double promedio = suma / numEstudiantes;
+
+        // Contar cuántas notas están por encima y por debajo del promedio
+        int arribaPromedio = 0;
+        int abajoPromedio = 0;
+        for (double nota : notas) {
+            if (nota > promedio) {
+                arribaPromedio++;
+            } else if (nota < promedio) {
+                abajoPromedio++;
+            }
+        }
+
+        // Mostrar resultados
+        System.out.printf("\nPromedio de las notas: %.2f\n", promedio);
+        System.out.println("Cantidad de notas por encima del promedio: " + arribaPromedio);
+        System.out.println("Cantidad de notas por debajo del promedio: " + abajoPromedio);
+
+        // Cerrar el scanner
+        scanner.close();
+    }
+}
