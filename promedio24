@@ -1,0 +1,105 @@
+MAIN
+package a;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+
+        // Leer la cantidad de estudiantes
+        System.out.print("Ingrese el número de estudiantes: ");
+        int numEstudiantes = teclado.nextInt();
+
+        // Crear un grupo de estudiantes
+        GrupoEstudiantes grupo = new GrupoEstudiantes(numEstudiantes);
+
+        // Leer las notas de los estudiantes
+        for (int i = 0; i < numEstudiantes; i++) {
+            while (true) {
+                System.out.print("Ingrese la nota del estudiante " + (i + 1) + ": ");
+                double nota = teclado.nextDouble();
+                try {
+                    grupo.agregarEstudiante(i, new Estudiante(nota));
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        // Calcular el promedio
+        double promedio = grupo.calcularPromedio();
+
+        // Contar cuántas notas están por encima y por debajo del promedio
+        int arribaPromedio = grupo.contarNotasArribaPromedio(promedio);
+        int abajoPromedio = grupo.contarNotasAbajoPromedio(promedio);
+
+        // Mostrar resultados
+        System.out.printf("\nPromedio de las notas: %.2f\n", promedio);
+        System.out.println("Cantidad de notas por encima del promedio: " + arribaPromedio);
+        System.out.println("Cantidad de notas por debajo del promedio: " + abajoPromedio);
+    }
+}
+CLASS
+package a;
+
+class Estudiante {
+    private double nota;
+
+    public Estudiante(double nota) {
+        setNota(nota);
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        if (nota >= 0 && nota <= 10) {
+            this.nota = nota;
+        } else {
+            throw new IllegalArgumentException("La nota debe estar entre 0 y 10.");
+        }
+    }
+}
+
+class GrupoEstudiantes {
+    private Estudiante[] estudiantes;
+
+    public GrupoEstudiantes(int numEstudiantes) {
+        estudiantes = new Estudiante[numEstudiantes];
+    }
+
+    public void agregarEstudiante(int indice, Estudiante estudiante) {
+        estudiantes[indice] = estudiante;
+    }
+
+    public double calcularPromedio() {
+        double suma = 0;
+        for (Estudiante estudiante : estudiantes) {
+            suma += estudiante.getNota();
+        }
+        return suma / estudiantes.length;
+    }
+
+    public int contarNotasArribaPromedio(double promedio) {
+        int contador = 0;
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getNota() > promedio) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public int contarNotasAbajoPromedio(double promedio) {
+        int contador = 0;
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getNota() < promedio) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+}
